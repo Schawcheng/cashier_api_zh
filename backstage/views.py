@@ -185,6 +185,9 @@ class Notify(APIView):
 
             signature = tools.md5(sign_will)
 
+            logging.debug(sign_will_payload)
+            logging.debug(sign_will)
+
             logging.debug(f'{sign}=={signature}')
             logging.debug(f'trade_status={trade_status}')
 

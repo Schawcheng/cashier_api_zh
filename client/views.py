@@ -73,26 +73,24 @@ class Pay(APIView):
                                 # 日志格式
                                 )
 
-            print(response.status_code)
-
             if response.status_code == 200 and response.json()['code'] == 200:
-                order = OrderModel(
-                    order_no=out_trade_no,
-                    status=5,
-                    channel_id=channel.cid,
-                    tid='-1',
-                    amount=amount,
-                    remark=desc
-                )
-                order.save()
+                if response.json()['code'] == 200:
+                    order = OrderModel(
+                        order_no=out_trade_no,
+                        status=5,
+                        channel_id=channel.cid,
+                        tid='-1',
+                        amount=amount,
+                        remark=desc
+                    )
+                    order.save()
 
-                pay_url = response.json()['data']['url']
+                    pay_url = response.json()['data']['url']
 
-                return Response(tools.api_response(
-                    201,
-                    '订单创建成功, 支付请求已发出',
-                    {'pay_url': pay_url})
-                )
+                    return Response(tools.api_response(201,'订单创建成功, 支付请求已发出',{'pay_url': pay_url}))
+                else:
+                    return Response(tools.api_response(401, response.json()['message']))
+
             else:
                 logging.debug(response.text)
                 return Response(tools.api_response(500, '支付失败，请稍后再试'))
