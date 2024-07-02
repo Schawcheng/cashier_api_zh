@@ -175,8 +175,8 @@ class Notify(APIView):
                 'trade_status': trade_status,
                 'amount': amount,
                 'real_amount': real_amount,
-                'complete_time': complete_time,
-                'desc': desc,
+                # 'complete_time': complete_time,
+                # 'desc': desc,
                 'time': time_
             }
 
