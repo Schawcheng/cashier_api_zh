@@ -1,5 +1,5 @@
-NAME = 'cashier'
+NAME = 'cashier_zh'
 HOST = 'localhost'
 PORT = 3306
 USER = 'root'
-PASSWORD = 'Wdnmd1314159...'
+PASSWORD = 'fantasy123'

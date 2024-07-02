@@ -1,0 +1,89 @@
+2024-07-02 05:12:39,299 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:94] - DEBUG: {"code":10000,"message":"签名错误"}
+2024-07-02 05:13:40,967 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:14:36,403 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:96] - DEBUG: {"code":10000,"message":"签名错误"}
+2024-07-02 05:15:58,702 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:16:21,764 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:98] - DEBUG: {"code":200,"message":"OK","data":{"type":"url","url":"https:\/\/dsj.mcjinglei.com\/index\/pay?order_id=A702973816063236"}}
+2024-07-02 05:16:49,376 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/urllib3/connectionpool.py[line:1055] - DEBUG: Starting new HTTPS connection (1): zhonghuamon-api.meisuobudamiya.cc:443
+2024-07-02 05:16:50,489 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/urllib3/connectionpool.py[line:549] - DEBUG: https://zhonghuamon-api.meisuobudamiya.cc:443 "POST /api/order HTTP/1.1" 200 None
+2024-07-02 05:16:50,490 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:98] - DEBUG: {"code":200,"message":"OK","data":{"type":"url","url":"https:\/\/dsj.mcjinglei.com\/index\/pay?order_id=A702974102372165"}}
+2024-07-02 05:18:30,911 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:18:38,011 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:97] - DEBUG: {"code":200,"message":"OK","data":{"type":"url","url":"https:\/\/dsj.mcjinglei.com\/index\/pay?order_id=A702975177985789"}}
+2024-07-02 05:18:57,317 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:19:13,233 - /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py[line:97] - DEBUG: {"code":200,"message":"OK","data":{"type":"url","url":"https:\/\/dsj.mcjinglei.com\/index\/pay?order_id=A702975529901230"}}
+2024-07-02 05:19:22,639 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:19:29,276 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/log.py[line:241] - ERROR: Internal Server Error: /api/client/pay/
+Traceback (most recent call last):
+  File "/Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py", line 89, in post
+    pay_url = response.json['data']['url']
+TypeError: 'method' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py", line 100, in post
+    traceback.print_exc(e)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 179, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 119, in print_exception
+    te = TracebackException(type(value), value, tb, limit=limit, compact=True)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 502, in __init__
+    self.stack = StackSummary.extract(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 357, in extract
+    if limit >= 0:
+TypeError: '>=' not supported between instances of 'TypeError' and 'int'
+2024-07-02 05:19:50,991 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/urllib3/connectionpool.py[line:1055] - DEBUG: Starting new HTTPS connection (1): zhonghuamon-api.meisuobudamiya.cc:443
+2024-07-02 05:19:52,145 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/urllib3/connectionpool.py[line:549] - DEBUG: https://zhonghuamon-api.meisuobudamiya.cc:443 "POST /api/order HTTP/1.1" 200 None
+2024-07-02 05:19:52,152 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/log.py[line:241] - ERROR: Internal Server Error: /api/client/pay/
+Traceback (most recent call last):
+  File "/Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py", line 89, in post
+    pay_url = response.json['data']['url']
+TypeError: 'method' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py", line 100, in post
+    traceback.print_exc(e)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 179, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 119, in print_exception
+    te = TracebackException(type(value), value, tb, limit=limit, compact=True)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 502, in __init__
+    self.stack = StackSummary.extract(
+  File "/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/traceback.py", line 357, in extract
+    if limit >= 0:
+TypeError: '>=' not supported between instances of 'TypeError' and 'int'
+2024-07-02 05:20:54,591 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/client/views.py changed, reloading.
+2024-07-02 05:23:46,641 - /Users/misaka/Desktop/workspace_fn/cashier-api-zh-venv/lib/python3.10/site-packages/django/utils/autoreload.py[line:266] - INFO: /Users/misaka/Desktop/workspace_fn/cashier_api/backstage/views.py changed, reloading.

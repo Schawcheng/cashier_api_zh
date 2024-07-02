@@ -37,8 +37,8 @@ class OrderModel(models.Model):
     oid = models.AutoField(primary_key=True)
     order_no = models.CharField(max_length=32)
 
-    # 0=>待处理 1=>成功 2=>失败 3=>异常 4=>超时关闭 5=>支付请求成功发送
-    status = models.PositiveSmallIntegerField()
+    # -1=> 处理中 1=>成功 2=>失败 5=>支付请求成功发送
+    status = models.SmallIntegerField()
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)

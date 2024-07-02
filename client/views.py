@@ -1,3 +1,5 @@
+import time
+import traceback
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -19,30 +21,35 @@ class ChannelDetail(APIView):
 
 class Pay(APIView):
     def post(self, request):
-        mid = mall.MID
-        mer_order_t_id = tools.generate_unique_order_number()
-        money = request.data.get('money')
-        channel_id = request.data.get('cid')
-        remark = request.data.get('remark')
+        app_id = mall.APP_ID
+        product_id = request.data.get('cid')
+        out_trade_no = tools.generate_unique_order_number()
         notify_url = mall.NOTIFY_URL
+        amount = request.data.get('money')
+        t_time = int(time.time())
+        desc = request.data.get('remark')
         key = mall.KEY
         pay_target = mall.PAY_TARGET
 
         try:
-            channel = ChannelModel.objects.get(cid=channel_id, is_del=False, is_valid=True)
+            channel = ChannelModel.objects.get(cid=product_id, is_del=False, is_valid=True)
         except ChannelModel.DoesNotExist:
+            traceback.print_exc()
             return Response(tools.api_response(404, '支付通道无效'))
 
         data = {
-            'mid': mid,
-            'merOrderTid': mer_order_t_id,
-            'money': money,
-            'channelCode': channel.channel_code,
-            'notifyUrl': notify_url
+            'app_id': app_id,
+            'product_id': product_id,
+            'out_trade_no': out_trade_no,
+            'notify_url': notify_url,
+            'amount': amount,
+            'time': t_time,
+            # 'desc': desc
         }
 
         sign_will_payload = tools.generate_query_string(data)
-        sign_will = f'{sign_will_payload}&{key}'
+
+        sign_will = f'{sign_will_payload}&key={key}'
 
         signature = tools.md5(sign_will)
 
@@ -57,37 +64,38 @@ class Pay(APIView):
 
             import logging
 
-            logging.basicConfig(level=logging.DEBUG,#控制台打印的日志级别
-                    filename='/opt/workspace/cashier_api_uwsgi/cashier_api.log',
-                    filemode='a',##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
-                    #a是追加模式，默认如果不写的话，就是追加模式
-                    format=
-                    '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
-                    #日志格式
-                    )
-            logging.debug(response.text)
+            logging.basicConfig(level=logging.DEBUG,  # 控制台打印的日志级别
+                                filename='/Users/misaka/Desktop/workspace_fn/cashier_api/cashier_api.log',
+                                filemode='a',  ##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
+                                # a是追加模式，默认如果不写的话，就是追加模式
+                                format=
+                                '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
+                                # 日志格式
+                                )
 
-            if response.status_code == 200 and response.json()['status'] == 0:
-                pay_result = response.json()['result']
-                pay_status = pay_result['payOrderStatus']
+            print(response.status_code)
+
+            if response.status_code == 200 and response.json()['code'] == 200:
                 order = OrderModel(
-                    order_no=mer_order_t_id,
+                    order_no=out_trade_no,
                     status=5,
                     channel_id=channel.cid,
-                    tid=pay_result['tid'],
-                    amount=money,
-                    remark=remark
+                    tid='-1',
+                    amount=amount,
+                    remark=desc
                 )
                 order.save()
 
-                pay_url = pay_result['payUrl']
+                pay_url = response.json()['data']['url']
 
                 return Response(tools.api_response(
                     201,
                     '订单创建成功, 支付请求已发出',
                     {'pay_url': pay_url})
                 )
+            else:
+                logging.debug(response.text)
+                return Response(tools.api_response(500, '支付失败，请稍后再试'))
         except Exception as e:
-            print(e)
-
-        return Response(tools.api_response(401, '支付请求发送失败，请检查支付参数'))
+            traceback.print_exc(e)
+            return Response(tools.api_response(401, '支付请求发送失败，请检查支付参数'))

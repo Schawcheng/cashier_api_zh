@@ -13,6 +13,8 @@ import tools
 from config import mall
 import config.common
 
+import logging
+
 
 class Login(APIView):
     def post(self, request):
@@ -144,28 +146,53 @@ class Orders(APIView):
 class Notify(APIView):
     def post(self, request):
         try:
-            mer_order_t_id = request.data.get('merOrderTid')
-            tid = request.data
-            money = request.data.get('money')
-            status = request.data.get('status')
+            logging.basicConfig(level=logging.DEBUG,  # 控制台打印的日志级别
+                                filename='/Users/misaka/Desktop/workspace_fn/cashier_api/cashier_api.log',
+                                filemode='a',  ##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
+                                # a是追加模式，默认如果不写的话，就是追加模式
+                                format=
+                                '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
+                                # 日志格式
+                                )
+
+            trade_no = request.data.get('trade_no')
+            product_id = request.data.get('product_id')
+            app_id = request.data.get('app_id')
+            out_trade_no = request.data.get('out_trade_no')
+            trade_status = request.data.get('trade_status')
+            amount = request.data.get('amount')
+            real_amount = request.data.get('real_amount')
+            complete_time = request.data.get('complete_time')
+            desc = request.data.get('desc')
+            time_ = request.data.get('time')
             sign = request.data.get('sign')
 
             data = {
-                'merOrderTid': mer_order_t_id,
-                'tid': tid,
-                'money': money,
-                'status': status
+                'trade_no': trade_no,
+                'product_id': product_id,
+                'app_id': app_id,
+                'out_trade_no': out_trade_no,
+                'trade_status': trade_status,
+                'amount': amount,
+                'real_amount': real_amount,
+                'complete_time': complete_time,
+                'desc': desc,
+                'time': time_
             }
 
             sign_will_payload = tools.generate_query_string(data)
-            sign_will = f'{sign_will_payload}&{mall.KEY}'
+            sign_will = f'{sign_will_payload}&key={mall.KEY}'
 
             signature = tools.md5(sign_will)
 
+            logging.debug(f'{sign}=={signature}')
+            logging.debug(f'trade_status={trade_status}')
+
             if signature == sign:
-                order = OrderModel.objects.get(order_no=mer_order_t_id)
-                order.status = status
-                order.save()
+                order = OrderModel.objects.get(order_no=out_trade_no)
+                order.status = trade_status
+                order.order_no = trade_no
+                order.save(update_fields=['trade_no', 'status'])
 
                 return Response('success')
         except Exception as e:
