@@ -195,7 +195,7 @@ class Notify(APIView):
                 order = OrderModel.objects.get(order_no=out_trade_no)
                 order.status = trade_status
                 order.order_no = trade_no
-                order.save(update_fields=['trade_no', 'status'])
+                order.save(update_fields=['order_no', 'status'])
 
                 return Response('success')
         except Exception as e:
