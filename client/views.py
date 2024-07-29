@@ -39,7 +39,7 @@ class Pay(APIView):
 
         data = {
             'app_id': app_id,
-            'product_id': product_id,
+            'product_id': channel.channel_code,
             'out_trade_no': out_trade_no,
             'notify_url': notify_url,
             'amount': amount,
